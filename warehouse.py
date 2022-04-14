@@ -58,13 +58,13 @@ class Warehouse:
         warehouse = self.getByName(name)
 
         if warehouse == 'warehouse doesnt exists':
-          return 'Can not add product to a non existent warehouse'
+          return 'Can not remove product from non existent warehouse'
 
         df = pd.read_csv('./data/warehouse.csv')
         df.loc[df['name'].isin([name]), 'capacity'] += 1
         df.to_csv('./data/warehouse.csv')
 
-        return 'product added to {}'.format(name)
+        return 'product removed from {}'.format(name)
 
     except Exception as e:
         print("An exception occurred while addProduct Warehouse",e)      

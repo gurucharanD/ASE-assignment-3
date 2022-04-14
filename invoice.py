@@ -86,22 +86,35 @@ class Invoice:
 
     def makePartialPayment(self,invoiceId,amount):
         try:
-            return
+            invoice = self.getById(invoiceId)
+            
+            if invoice == 'invoice doesnt exists':
+                return invoice
+
+            invoice = json.loads(invoice)[0]
+
+            invoice['paidAmount'] = invoice['paidAmount']+amount
+
+            df = pd.read_csv('./data/invoices.csv')
+            df.drop(invoice,True)
+            df = df.append(invoice,ignore_index=True)
+            df.to_csv('./data/invoices.csv')
+
+            return True
         except Exception as e:
             return e       
 
 
 def main():
     invoice = Invoice()
+
     # print(invoice.create('05acdbec-bae5-4bc9-a530-18f4aaca0059',1000,200))
     # print(invoice.getAll())
     # print(invoice.getById('99350f7a-15b4-4edd-9ca4-cff1c1f88c92'))
     # print(invoice.getById('123'))
     # print(invoice.getAllByStatus('open'))
     # print(invoice.getAllByStatus('closed'))
-
     # print(invoice.makeTotalPayment('39701fbd-f262-4aaa-8c71-7bf531a4fbef'))
-
 
     return
 

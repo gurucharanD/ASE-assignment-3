@@ -34,8 +34,11 @@ def main():
     customer = Customer()
     customer.create('guru','CA',10,'guru@gmail.com')
 
-    customerDetails = customer.getByName('customer1')
+    customerDetails = customer.getByName('test_user')
     print(customerDetails)
+
+    customerDetailsById = customer.getById('dfee093f-2fa3-43ef-beb6-d4f789c24506')
+    print(customerDetailsById)
 
     allCustomers = customer.getAll()
     print(allCustomers)
